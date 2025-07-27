@@ -13,7 +13,7 @@ Installation
 python3 -m venv venv
 source venv/bin/activate
 
-3. Install Dependencies
+2. Install Dependencies
 pip install flet
 pip install opencv-python
 pip install pillow
@@ -21,7 +21,7 @@ pip install fastapi
 pip install uvicorn
 pip install ultralytics
 
-Running the Project
+3. Running the Project
 Server (FastAPI)
 cd server (folder where the server is located)
 uvicorn server_fastapi:app --reload --host 0.0.0.0 --port 5000
