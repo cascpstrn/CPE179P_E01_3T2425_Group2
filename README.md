@@ -1,10 +1,42 @@
 # CPE179P_E01_3T2425_Group2
 
-1. Instructions for setting up a Python virtual environment
+Fruit Classification with Average Calorie Counter
 
-*************************************************
-1. Create your own LocalRepo folder using Powershell.
-2. After creating the LocalRepo Folder, install pyenv so that user can use different python versions.
-3. Before creating the virtual environment make sure that the python version is compatible with FLET and Mindspore.
-4. Create seperate virtual environments for FLET(python 3.9) and for MindSpore(python 3.9-3.11).
-5. Install Flet and Mindspore on their respective virtual environments.
+Overview
+
+This project implements YOLOv8 to classify fruit. It uses FastAPI to run the server and Flet for creating client GUI.
+
+Installation
+
+1. Create Virtual Environment
+
+python3 -m venv venv
+source venv/bin/activate
+
+3. Install Dependencies
+pip install flet
+pip install opencv-python
+pip install pillow
+pip install fastapi
+pip install uvicorn
+pip install ultralytics
+
+Running the Project
+Server (FastAPI)
+cd server (folder where the server is located)
+uvicorn server_fastapi:app --reload --host 0.0.0.0 --port 5000
+
+Client (Flet App)
+cd client (folder where the client is located)
+python ui2.0.py
+
+Dataset
+We used fruit classification dataset for training and evaluation.
+
+Architecture
+FastAPI server loads YOLOv8 model and logic for average calorie content
+Flet client sends video stream and displays results
+Communication via REST API 
+
+Contributors
+Group02: Beltran, Cali-at, Capistrano
