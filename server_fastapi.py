@@ -43,5 +43,5 @@ async def predict(request: ImageRequest):
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
     
-    #run in terminal uvicorn server_fastapi:app --reload --host 0.0.0.0 --port 5000
+
 
