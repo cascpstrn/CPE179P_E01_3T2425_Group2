@@ -13,7 +13,8 @@ calorie_map = {
     "banana": 89,
     "orange": 47,
     "grape": 69,
-    "mango": 60
+    "pineapple": 50,
+    "watermelon": 30
 }
 
 app = FastAPI()
