@@ -16,7 +16,6 @@ calorie_map = {
     "mango": 60
 }
 
-
 app = FastAPI()
 
 class ImageRequest(BaseModel):
@@ -25,23 +24,32 @@ class ImageRequest(BaseModel):
 @app.post("/predict")
 async def predict(request: ImageRequest):
     try:
+        
         image_data = base64.b64decode(request.image)
         image = Image.open(io.BytesIO(image_data)).convert("RGB")
 
+        
         results = model.predict(image, conf=0.25)
         boxes = results[0].boxes
-        if boxes:
-            class_id = int(boxes.cls[0].item())
-            class_name = model.names[class_id]
-            calories = calorie_map.get(class_name, "Unknown")
-        else:
-            class_name = "None"
-            calories = "N/A"
 
-        return {"fruit": class_name, "calories": calories}
+        detected_fruits = []
+        total_calories = 0
+
+        if boxes:
+            for box in boxes:
+                class_id = int(box.cls.item())
+                class_name = model.names[class_id]
+
+                calories = calorie_map.get(class_name, 0)
+                detected_fruits.append({"fruit": class_name, "calories": calories})
+                total_calories += calories
+        else:
+            detected_fruits.append({"fruit": "None", "calories": 0})
+
+        return {
+            "detected_fruits": detected_fruits,
+            "total_calories": total_calories
+        }
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
-    
-
-
